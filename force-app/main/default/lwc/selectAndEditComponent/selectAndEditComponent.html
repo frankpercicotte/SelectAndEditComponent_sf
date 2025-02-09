@@ -2,14 +2,15 @@
     <lightning-card title="Selecionar e Editar Valores">
         <div class="slds-m-around_medium">
             <div class="slds-grid slds-gutters">
-                <!-- Combobox -->
+                <!-- Combobox com pesquisa -->
                 <div class="slds-col slds-size_1-of-2">
                     <lightning-combobox
                         label="Escolha um item"
                         value={selectedItem}
-                        options={availableItems}
-                        onchange={handleItemChange}>
-                    </lightning-combobox>
+                        options={filteredItems}
+                        onchange={handleItemChange}
+                        placeholder="Digite para pesquisar"
+                    ></lightning-combobox>
                 </div>
 
                 <!-- Input de Valor -->
@@ -34,7 +35,7 @@
             </div>
         </div>
 
-        <template if:true={paginatedItems.length}>
+        <template if:true={itemList.length}>
             <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-m-top_medium">
                 <thead>
                     <tr>
@@ -44,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template for:each={paginatedItems} for:item="entry">
+                    <template for:each={itemList} for:item="entry">
                         <tr key={entry.id}>
                             <td>{entry.name}</td>
                             <td>{entry.value}</td>
@@ -60,13 +61,6 @@
                     </template>
                 </tbody>
             </table>
-
-            <!-- Controles de Paginação -->
-            <div class="slds-m-top_medium slds-grid slds-align_absolute-center">
-                <lightning-button label="Anterior" onclick={previousPage} disabled={disablePrevious}></lightning-button>
-                <span class="slds-m-horizontal_small">{currentPage} / {totalPages}</span>
-                <lightning-button label="Próximo" onclick={nextPage} disabled={disableNext}></lightning-button>
-            </div>
         </template>
     </lightning-card>
 </template>
