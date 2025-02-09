@@ -1,26 +1,37 @@
 <template>
     <lightning-card title="Selecionar e Editar Valores">
         <div class="slds-m-around_medium">
-            <lightning-combobox
-                label="Escolha um item"
-                value={selectedItem}
-                options={availableItems}
-                onchange={handleItemChange}>
-            </lightning-combobox>
+            <div class="slds-grid slds-gutters">
+                <!-- Combobox -->
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox
+                        label="Escolha um item"
+                        value={selectedItem}
+                        options={availableItems}
+                        onchange={handleItemChange}>
+                    </lightning-combobox>
+                </div>
 
-            <lightning-input
-                type="text"
-                label="Valor"
-                value={inputValue}
-                onchange={handleValueChange}>
-            </lightning-input>
+                <!-- Input de Valor -->
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input
+                        type="text"
+                        label="Valor"
+                        value={inputValue}
+                        onchange={handleValueChange}>
+                    </lightning-input>
+                </div>
 
-            <lightning-button-icon
-                icon-name="utility:add"
-                alternative-text="Adicionar"
-                variant="brand"
-                onclick={addItem}>
-            </lightning-button-icon>
+                <!-- Botão de Adicionar -->
+                <div class="slds-col slds-size_1-of-6 slds-align_absolute-center">
+                    <lightning-button-icon
+                        icon-name="utility:add"
+                        alternative-text="Adicionar"
+                        variant="brand"
+                        onclick={addItem}>
+                    </lightning-button-icon>
+                </div>
+            </div>
         </div>
 
         <template if:true={paginatedItems.length}>
