@@ -1,46 +1,65 @@
 <template>
     <lightning-card title="Selecionar e Editar Valores">
         <div class="slds-m-around_medium">
-            <lightning-combobox
-                label="Escolha um item"
-                value={selectedItem}
-                options={availableItems}
-                onchange={handleItemChange}>
-            </lightning-combobox>
+            <div class="slds-grid slds-gutters">
+                <!-- Combobox -->
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning-combobox
+                        label="Escolha um item"
+                        value={selectedItem}
+                        options={availableItems}
+                        onchange={handleItemChange}>
+                    </lightning-combobox>
+                </div>
 
-            <lightning-input
-                type="text"
-                label="Valor"
-                value={inputValue}
-                onchange={handleValueChange}>
-            </lightning-input>
+                <!-- Input de Valor -->
+                <div class="slds-col slds-size_1-of-3">
+                    <lightning-input
+                        type="text"
+                        label="Valor"
+                        value={inputValue}
+                        onchange={handleValueChange}>
+                    </lightning-input>
+                </div>
 
-            <lightning-button-icon
-                icon-name="utility:add"
-                alternative-text="Adicionar"
-                variant="brand"
-                onclick={addItem}>
-            </lightning-button-icon>
+                <!-- Botão de Adicionar -->
+                <div class="slds-col slds-size_1-of-6 slds-align_absolute-center">
+                    <lightning-button-icon
+                        icon-name="utility:add"
+                        alternative-text="Adicionar"
+                        variant="brand"
+                        onclick={addItem}>
+                    </lightning-button-icon>
+                </div>
+            </div>
         </div>
 
         <template if:true={paginatedItems.length}>
-            <ul class="slds-m-top_medium">
-                <template for:each={paginatedItems} for:item="entry">
-                    <li key={entry.id} class="slds-box slds-m-bottom_small slds-grid slds-align_absolute-center">
-                        <span class="slds-m-right_medium">{entry.name}: {entry.value}</span>
-
-                        <!-- Botão Editar -->
-                        <lightning-button-icon icon-name="utility:edit" alternative-text="Editar"
-                            class="slds-m-right_small" onclick={editItem} data-id={entry.id}>
-                        </lightning-button-icon>
-
-                        <!-- Botão Remover -->
-                        <lightning-button-icon icon-name="utility:delete" alternative-text="Remover"
-                            class="slds-m-right_small" onclick={removeItem} data-id={entry.id}>
-                        </lightning-button-icon>
-                    </li>
-                </template>
-            </ul>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-m-top_medium">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={paginatedItems} for:item="entry">
+                        <tr key={entry.id}>
+                            <td>{entry.name}</td>
+                            <td>{entry.value}</td>
+                            <td>
+                                <lightning-button-icon icon-name="utility:edit" alternative-text="Editar"
+                                    class="slds-m-right_small" onclick={editItem} data-id={entry.id}>
+                                </lightning-button-icon>
+                                <lightning-button-icon icon-name="utility:delete" alternative-text="Remover"
+                                    onclick={removeItem} data-id={entry.id}>
+                                </lightning-button-icon>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
 
             <!-- Controles de Paginação -->
             <div class="slds-m-top_medium slds-grid slds-align_absolute-center">

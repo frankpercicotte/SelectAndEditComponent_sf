@@ -13,7 +13,12 @@ export default class SelectAndEditComponent extends LightningElement {
         { label: 'Taxa de Crédito', value: 'Taxa de Crédito' },
         { label: 'Taxa de Débito', value: 'Taxa de Débito' },
         { label: 'Taxa de Pix', value: 'Taxa de Pix' },
-        { label: 'ITC', value: 'ITC' }
+        { label: 'ITC', value: 'ITC' },
+        { label: 'Valor mínimo', value: 'Valor mínimo' },
+        { label: 'Valor máximo', value: 'Valor máximo' },
+        { label: 'Dia pagamento', value: 'Dia pagamento' },
+
+        
     ];
 
     // Opções disponíveis no Combobox (itens ainda não selecionados)
